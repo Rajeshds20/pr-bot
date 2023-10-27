@@ -1,33 +1,64 @@
-# pr-bot
+---
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+# PR Bot App
 
-## Setup
+## Table of Contents
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Installation Steps](#installation-steps)
+4. [Web Hooks](#web-hooks)
+5. [Tech Stack](#tech-stack)
+6. [Video Demp](#video-demo)
+7. [Challenges Faced](#challenges-faced)
+8. [Improvement](#improvement)
 
-```sh
-# Install dependencies
-npm install
+## Overview
+This is a PR Code Runner App, that will run your code block that is sent in the PR Comment, and if it has '/execute' command in it, it will extract the code from the comment. Then the bot will itself run the code through PISTON API, later it will put the output/result as comment as a reply in the same PR.
 
-# Run the bot
-npm start
-```
+### Features
+- It will run your code automantically after every PR
+- It will comment the output if the code is correct and errors if the code is wrong, which helps us to find the mistakes easily
+- Uses latest version of runtime for code execution
+- If the code exexutes correctly then the bot itself will approve the PR, and we can simply review and merge the PR.
 
-## Docker
+## Installation Steps
+- To install this Github Application in your server, then you have to go to https://github.com/apps/pr-coderun-bot
+- Then Click on Congigure in right side of window
+- Select your repository to which you want to add the application
+- Then click on install, Its Done.
 
-```sh
-# 1. Build container
-docker build -t pr-bot .
+### Env Setup
+- Clone the repository by using ```git clone https://github.com/Rajeshds20/pr-bot```
+- Then go to directory ```cd pr-bot```
+- Then Do ```npm install``` to install all the dependencies
+- Go to ```http://localhost:3000``` for setting up your application with github.
+- Then follow the steps shown by Github,
+- You are done, you can run the application with ```npm run start```
 
-# 2. Start container
-docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> pr-bot
-```
+### Web Hooks (GitHub)
+- pull_request(edited, opened)
+- issues(opened)
+- pull_request_review_comment(created, edited)
 
-## Contributing
+### Tech Stack
+- NodeJS
+- Probot
+- Piston
+- GitHub
 
-If you have suggestions for how pr-bot could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+### Video Demo
+Here is a video showing the working demo of the application 
 
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
-## License
+### Challenges Faced
+- Working with Webhooks initially was a challenge
+- Verification of each hook working
+- In the initial phase I don't know about permissions and hooks, so testing is one of the challenge
 
-[ISC](LICENSE) © 2023 Devangam Sajja Rajesh
+### Improvement
+- We can add support for multiple languages
+- Adding clear instructions to the user in detail for the usage
+- Giving option to select the code that the user want to run directly from the PR
+
+
+---

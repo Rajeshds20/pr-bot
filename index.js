@@ -27,7 +27,7 @@ module.exports = (app) => {
 
   // Respond to pull request creation with '/execute' events with a comment of output in their code
   app.on(
-    ["pull_request.opened", "pull_request.edited"],
+    ["pull_request.opened", "pull_request.edited", "pull_request_review_comment.created", "pull_request_review_comment.edited"],
     async (context) => {
       try {
         const commentBody = context.payload.pull_request.body;
