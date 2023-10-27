@@ -3,7 +3,7 @@
  * @param {import('probot').Probot} app
  */
 
-const piston = require("./temp");
+const piston = require("./config");
 
 const client = piston();
 
@@ -31,13 +31,14 @@ module.exports = (app) => {
     async (context) => {
       try {
         const commentBody = context.payload.pull_request.body;
-        app.log.info(commentBody);
-        app.log.info(commentBody !== null);
+        // app.log.info(commentBody);
+        // app.log.info(commentBody !== null);
+        // Check if there is /execute command in the comment
         if (commentBody && commentBody.includes("/execute")) {
 
           const codeSnippetRegex = /```([\s\S]+?)```/;
           const codeMatches = commentBody.match(codeSnippetRegex);
-          app.log.info(codeMatches);
+          // app.log.info(codeMatches);
 
           if (codeMatches && codeMatches.length >= 2) {
             const codeToExecute = codeMatches[1];
@@ -47,7 +48,7 @@ module.exports = (app) => {
             client.execute("python", codeToExecute)
               .then(async (executionResult) => {
                 // Sending it back as a comment on the pull request
-                app.log.info(executionResult);
+                // app.log.info(executionResult);
                 AddComment(context, "Execution Result:\n```\n" + executionResult.run.output + "\n```");
                 await context.octokit.pulls.createReview({
                   ...context.pullRequest(),
@@ -56,7 +57,7 @@ module.exports = (app) => {
               })
               .catch((error) => {
                 // Handle API request errors
-                app.log.info("Error executing code:", error);
+                // app.log.info("Error executing code:", error);
                 AddComment(context, "Error executing code: " + error.message);
               });
           } else {
@@ -65,14 +66,14 @@ module.exports = (app) => {
           }
         }
       } catch (error) {
-        app.log.info("Error executing code:", error);
+        // app.log.info("Error executing code:", error);
         // AddComment(context, "Error executing code: " + error.message);
       }
     });
-
-  // For more information on building apps:
-  // https://probot.github.io/docs/
-
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
 };
+
+// For more information on building apps:
+// https://probot.github.io/docs/
+
+// To get your app running against GitHub, see:
+// https://probot.github.io/docs/development/
