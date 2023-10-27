@@ -20,6 +20,7 @@ This is a PR Code Runner App, that will run your code block that is sent in the 
 - It will comment the output if the code is correct and errors if the code is wrong, which helps us to find the mistakes easily
 - Uses latest version of runtime for code execution
 - If the code exexutes correctly then the bot itself will approve the PR, and we can simply review and merge the PR.
+- Presently it is working for only Python, and can be modified to support multiple languages.
 
 ## Installation Steps
 - To install this Github Application in your server, then you have to go to https://github.com/apps/pr-coderun-bot
